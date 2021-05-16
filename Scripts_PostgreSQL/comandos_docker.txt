@@ -1,0 +1,23 @@
+## Certifique-se de ter o Docker Instalado
+
+## OBS: Se já tiver um servidor PostgresSQL local rodando e mesmo assim quiser usar o Docker,
+## no comando abaixo, troque a porta do BD(Docker) que será mapeada para não ter conflito com a porta do servidor local
+## exemplo: onde se lê 5432:5432 coloque ????:5432 onde ???? é a porta de sua preferência
+
+## Rode o comando abaixo para baixar uma imagem Docker do PostgresSQL
+## e configurar o Banco de Dados da Api
+
+docker run --name cities -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=cities postgres
+
+
+
+## Para criar e inserir dados nas tabelas:
+## Baixe os Scripts em https://github.com/chinnonsantos/sql-paises-estados-cidades/tree/master/PostgreSQL
+## vá até a pasta onde seus scripts estão localizados e digite os seguintes comandos:
+
+docker run -it --rm --net=host -v $PWD:/tmp postgres /bin/bash
+
+psql -h localhost -U postgres cities -f /tmp/pais.sql
+psql -h localhost -U postgres cities -f /tmp/estado.sql
+psql -h localhost -U postgres cities -f /tmp/cidade.sql
+
