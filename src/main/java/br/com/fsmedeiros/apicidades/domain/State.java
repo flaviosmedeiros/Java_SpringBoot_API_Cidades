@@ -1,11 +1,19 @@
 package br.com.fsmedeiros.apicidades.domain;
 
+
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = "State")
 @Table(name = "estado")
@@ -33,26 +41,40 @@ public class State {
     @Column(name = "ddd", columnDefinition = "jsonb")
     private List<Integer> ddd;
 
+    public State() {
+    }
 
-    public State(){
+    public State(Long id, String name, String uf, Integer ibge,
+                 Country country, List<Integer> ddd) {
+        this.id = id;
+        this.name = name;
+        this.uf = uf;
+        this.ibge = ibge;
+        this.country = country;
+        this.ddd = ddd;
     }
 
     public Long getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public String getUf() {
         return uf;
     }
+
     public Integer getIbge() {
         return ibge;
     }
-    public Country getCountry() {
-        return country;
-    }
+
     public List<Integer> getDdd() {
         return ddd;
+    }
+
+    public Country getCountry() {
+        return country;
     }
 }

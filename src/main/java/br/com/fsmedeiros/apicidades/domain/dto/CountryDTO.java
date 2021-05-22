@@ -2,8 +2,6 @@ package br.com.fsmedeiros.apicidades.domain.dto;
 
 import br.com.fsmedeiros.apicidades.domain.Country;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 
 public class CountryDTO {
 

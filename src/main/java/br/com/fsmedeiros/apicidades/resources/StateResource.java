@@ -17,7 +17,7 @@ public class StateResource {
     StateService service;
 
     @GetMapping
-    public List<State> staties() {
+    public List<State> states() {
         return service.findAll();
     }
 }

@@ -51,6 +51,16 @@ public class DistanceService {
         return doCalculation(location1[0], location1[1], location2[0], location2[1], unit);
     }
 
+    public Double distanceUsingPoints(final Long city1, final Long city2, final EarthRadius unit) {
+        log.info("distanceUsingPoints({}, {}, {})", city1, city2, unit);
+        final List<City> cities = cityRepository.findAllById((Arrays.asList(city1, city2)));
+
+        Point p1 = cities.get(0).getLocation();
+        Point p2 = cities.get(1).getLocation();
+
+        return doCalculation(p1.getX(), p1.getY(), p2.getX(), p2.getY(), unit);
+    }
+
     private double doCalculation(final double lat1, final double lon1, final double lat2,
                                  final double lng2, final EarthRadius earthRadius) {
         double lat = toRadians(lat2 - lat1);
