@@ -1,0 +1,16 @@
+language: java
+
+os: linux
+dist: trusty
+jdk: oraclejdk11
+
+jobs:
+  include:
+    - stage: "Build project"
+      script:
+        - ./gradlew build
+
+deploy:
+  provider: heroku
+  app: mede-citiesapi
+  api_key: $HEROKU_KEY
