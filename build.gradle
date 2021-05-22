@@ -2,6 +2,8 @@ plugins {
 	id 'org.springframework.boot' version '2.4.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'checkstyle'
+	id 'pmd'
 }
 
 group = 'br.com.fsmedeiros'
@@ -18,9 +20,24 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'com.vladmihalcea:hibernate-types-52:2.9.8'
 	implementation 'org.postgresql:postgresql'
+	implementation 'org.flywaydb:flyway-core'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
 	useJUnitPlatform()
+}
+
+pmd {
+	consoleOutput = true
+	toolVersion = "6.21.0"
+	rulePriority = 5
+	ruleSetFiles = files("pmd-ruleset.xml")
+	ruleSets = []
+	//ruleSets = ["category/java/bestpractices.xml"]
+}
+
+checkstyle {
+	toolVersion "8.31"
+	configFile file("google_checks.xml")
 }
